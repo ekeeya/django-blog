@@ -1,0 +1,304 @@
+{% extends "nnanda/base.html" %}
+{% load static %}
+{% load nnanda_extras %}
+        {% block afterheader %}
+            <div class="pageheader-content row">
+            <div class="col-full">
+
+                <div class="featured">
+
+                    <div class="featured__column featured__column--big">
+                        <div class="entry" style="background-image:url('{{recent_post.img.url}}');">
+                            
+                            <div class="entry__content">
+                                <span class="entry__category"><a href="#0">{{recent_post.category}}</a></span>
+
+                                <h1><a href="post/{{recent_post.id}}" title="">
+                                {{recent_post.title}}</a></h1>
+
+                                <div class="entry__info">
+                                    <a href="#" class="entry__profile-pic">
+                                        <img class="avatar" src="{% static 'images/avatars/user-03.jpg' %}" alt="">
+                                    </a>
+
+                                    <ul class="entry__meta">
+                                        <li><a href="#">{{recent_post.created_by}}</a></li>
+                                        <li>{{recent_post.created_on}}</li>
+                                    </ul>
+                                </div>
+                            </div> <!-- end entry__content -->
+                            
+                        </div> <!-- end entry -->
+                    </div> <!-- end featured__big -->
+
+                    
+                    {% for post in posts%}
+                        {% if forloop.counter0 > 0 %}
+                    <div class="featured__column featured__column--small">
+
+                        <div class="entry" style="background-image:url('{{post.img.url}}');">
+                            
+                            <div class="entry__content">
+                                <span class="entry__category"><a href="#0">{{post.category}}</a></span>
+
+                                <h1><a href="post/{{post.id}}" title="">{{post.title}}</a></h1>
+
+                                <div class="entry__info">
+                                    <a href="#" class="entry__profile-pic">
+                                        <img class="avatar" src="{% static 'images/avatars/user-03.jpg' %}" alt="">
+                                    </a>
+
+                                    <ul class="entry__meta">
+                                        <li><a href="#0">{{post.created_by}}</a></li>
+                                        <li>{{post.created_on}}</li>
+                                    </ul>
+                                </div>
+                            </div> <!-- end entry__content -->
+                          
+                        </div> <!-- end entry -->
+
+                    </div> <!-- end featured__small -->
+                    {% endif %}
+                    {% endfor %}
+                </div> <!-- end featured -->
+
+            </div> <!-- end col-full -->
+        </div> <!-- end pageheader-content row -->
+        {% endblock afterheader %}
+
+        
+
+        {% block content %}
+            <div class="row masonry-wrap">
+            <div class="masonry">
+
+                <div class="grid-sizer"></div>
+
+                {% for post in posts %}
+                    <article class="masonry__brick entry format-standard" data-aos="fade-up">
+                        
+                    <div class="entry__thumb">
+                        <a href="single-standard.html" class="entry__thumb-link">
+                            <img src="{{post.img.url}}" 
+                                    srcset="{{post.img.url}} 1x, {{post.img.url}} 2x" alt="">
+                        </a>
+                    </div>
+    
+                    <div class="entry__text">
+                        <div class="entry__header">
+                            
+                            <div class="entry__date">
+                                <a href="#">{{post.created_on}}</a>
+                            </div>
+                            <h1 class="entry__title"><a href="post/{{post.id}}">{{post.title}}</a></h1>
+                            
+                        </div>
+                        <div class="entry__excerpt">
+                            <p>
+                                {{post.body|trim:300}}.......
+                            </p>
+                        </div>
+                        <div class="entry__meta">
+                            <span class="entry__meta-links">
+                                <a href="category.html">{{post.category}}</a> 
+                            </span>
+                        </div>
+                    </div>
+    
+                </article> 
+                {% endfor %}
+
+            </div> <!-- end masonry -->
+        </div> <!-- end masonry-wrap -->
+
+        <div class="row">
+            <div class="col-full">
+                <nav class="pgn">
+                    <ul>
+                        <li><a class="pgn__prev" href="#0">Prev</a></li>
+                        <li><a class="pgn__num current" href="#0">1</a></li>
+                        <li><a class="pgn__next" href="#0">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        {% endblock content %}
+
+
+    <!-- s-extra
+    ================================================== -->
+    {% block extras %}
+    <div class="row top">
+
+            <div class="col-eight md-six tab-full popular">
+                <h3>Popular Posts</h3>
+
+                <div class="block-1-2 block-m-full popular__posts">
+                    {%for post in posts %}
+                    <article class="col-block popular__post">
+                        <a href="#0" class="popular__thumb">
+                            <img src="{{post.img.url}}" alt="">
+                        </a>
+                        <h5><a href="#0">{{post.title}}</a></h5>
+                        <section class="popular__meta">
+                                <span class="popular__author"><span>By</span> <a href="#0">{{post.created_by}}</a></span>
+                            <span class="popular__date"><span>on</span> <time datetime="2017-12-19">{{post.created_on}}</time></span>
+                        </section>
+                    </article>
+                    
+                    {%endfor%}
+                </div> <!-- end popular_posts -->
+            </div> <!-- end popular -->
+            
+            <div class="col-four md-six tab-full about">
+                <h3>About Philosophy</h3>
+
+                <p>
+                Donec sollicitudin molestie malesuada. Nulla quis lorem ut libero malesuada feugiat. Pellentesque in ipsum id orci porta dapibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Donec sollicitudin molestie malesuada.
+                </p>
+
+                <ul class="about__social">
+                    <li>
+                        <a href="#0"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                    </li>
+                </ul> <!-- end header__social -->
+            </div> <!-- end about -->
+
+        </div> <!-- end row -->
+       {% endblock extras %}
+    
+
+
+    <!-- s-footer
+    ================================================== -->
+    <footer class="s-footer">
+
+        <div class="s-footer__main">
+            <div class="row">
+                
+                <div class="col-two md-four mob-full s-footer__sitelinks">
+                        
+                    <h4>Quick Links</h4>
+
+                    <ul class="s-footer__linklist">
+                        <li><a href="#0">Home</a></li>
+                        <li><a href="#0">Cotegories</a></li>
+                        <li><a href="#0">Contact</a></li>
+                    </ul>
+
+                </div> <!-- end s-footer__sitelinks -->
+
+                <div class="col-two md-four mob-full s-footer__archives">
+                        
+                    <h4>Archives</h4>
+
+                    <ul class="s-footer__linklist">
+                        <li><a href="#0">January 2018</a></li>
+                        <li><a href="#0">December 2017</a></li>
+                        <li><a href="#0">November 2017</a></li>
+                        <li><a href="#0">October 2017</a></li>
+                        <li><a href="#0">September 2017</a></li>
+                        <li><a href="#0">August 2017</a></li>
+                    </ul>
+
+                </div> <!-- end s-footer__archives -->
+
+                <div class="col-two md-four mob-full s-footer__social">
+                        
+                    <h4>Social</h4>
+
+                    <ul class="s-footer__linklist">
+                        <li><a href="#0">Facebook</a></li>
+                        <li><a href="#0">Instagram</a></li>
+                        <li><a href="#0">Twitter</a></li>
+                    </ul>
+
+                </div> <!-- end s-footer__social -->
+
+                <div class="col-five md-full end s-footer__subscribe">
+                        
+                    <h4>Get notified whenever Nnanda Kizito posts something</h4>
+
+                    <p>Provide your email address below for quick notifications</p>
+
+                    <div class="subscribe-form">
+                        <form id="mc-form" class="group" novalidate="true">
+
+                            <input style="background-color:grey" type="email" value="" name="EMAIL" class="email" id="mc-email" placeholder="Email Address" required="">
+                            <input type="submit" name="subscribe" value="Send">
+                
+                            <label for="mc-email" class="subscribe-message"></label>
+                
+                        </form>
+                    </div>
+
+                </div> <!-- end s-footer__subscribe -->
+
+            </div>
+        </div> <!-- end s-footer__main -->
+
+        <div class="s-footer__bottom">
+            <div class="row">
+                <div class="col-full">
+                    <div class="s-footer__copyright">
+                        <span>© Copyright Keeya Emmanuel 2020</span> 
+                        <span>Designed and hosted by <a href="http://keldotcom.com">KEL IT SOLUTIONS</a></span>
+                    </div>
+
+                    <div class="go-top">
+                        <a class="smoothscroll" title="Back to Top" href="#top"></a>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end s-footer__bottom -->
+
+    </footer> <!-- end s-footer -->
+
+
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader">
+            <div class="line-scale">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <!--Login Modal content -->
+        <div id="modal"  class="modal">
+            <div  class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h3 id="modalheading" class="modal-header-text">Login</h2>
+                </div>
+                <div class="modal-body">
+                    <div style="margin-left:50px;margin-right:100px" class="subscribe-form">
+                            <div id="mc-form" class="group" >
+                                <br>
+                                <input style="background-color:white;width:100%" type="email" id="email"  class="email"  placeholder="Enter E-mail" required>
+                                <button id="submit"><span id="action">LOGIN</span></button>
+                                <br>
+                                <div id="error" style="align-content:center;color:red;display:none"></div>
+                                <br>
+                                <div class="row">
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        

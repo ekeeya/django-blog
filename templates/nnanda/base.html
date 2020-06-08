@@ -1,0 +1,369 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>Nnanda</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+    <!-- script
+    ================================================== -->
+    <script src="{% static 'js/modernizr.js' %}"></script>
+    <script src="{% static 'js/pace.min.js' %}"></script>
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="{% static '' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+
+</head>
+
+<body id="top">
+
+    <!-- pageheader
+    ================================================== -->
+    {% if request.resolver_match.url_name == 'post' %}
+    <div class="s-pageheader">
+    {% else %}
+    <section class="s-pageheader s-pageheader--home">
+    {% endif %}
+        <header class="header">
+            <div class="header__content row">
+                <div class="header__logo">
+                    <a style="color:white;font-size:25pt;" class="logo" href="index.html">
+                    <b>Nnanda Kizito Sseruwagi.</b>
+                       <!--<img src="{% static 'images/logo.svg' %}" alt="Homepage">--> 
+                    </a>
+                </div> <!-- end header__logo -->
+
+                <ul class="header__social">
+                    <li>
+                        <a href="#0"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </li>
+                </ul> <!-- end header__social -->
+                <nav class="header__nav-wrap">
+                    <ul class="header__nav">
+                        <li><a href="/nnanda/" title="">Home</a></li>
+                        <li class="has-children">
+                            <a href="#0" title="">Categories</a>
+                            <ul class="sub-menu">
+                            {% for category in categories%}
+                            <li><a href="#">{{category.cat_name}}</a></li>
+                            {% endfor %}
+                            </ul>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li>welcome {{user.username}}</li>
+                        <li><a href="#" id="logout">Logout</a></li>
+                        {% else %}
+                        <li><a href="#" id="openLogin">Login</a></li>
+                        <li><a href="#" id="openRegister" >Register</a></li>
+                        <li><a href="/admin/" title="">Admin</a></li>
+                        {% endif %}
+                    </ul> <!-- end header__nav -->
+                </nav> <!-- end header__nav-wrap -->
+                 
+            </div> <!-- header-content -->
+        </header> <!-- header -->
+    </div> <!-- end s-pageheader -->
+    {% if request.resolver_match.url_name == 'post' %}
+    </div>
+    {% else %}
+    {% block afterheader %}
+
+    {% endblock afterheader %}
+    </section>
+    {% endif %}
+    
+    <!-- s-content
+    ================================================== -->
+    <section class="s-content s-content--narrow s-content--no-padding-bottom">
+    {% block postDetails %}
+    {% endblock postDetails %}
+    </section>
+    <section class="s-content">
+        {% block content %}
+
+        {% endblock content %}
+    </section> 
+    <!-- s-content -->
+
+
+    <!-- s-extra
+    ================================================== -->
+    <section class="s-extra">
+
+       {% block extras %}
+       {% endblock extras %}
+
+    </section> 
+    <!-- end s-extra -->
+
+
+    <!-- s-footer
+    ================================================== -->
+    <footer class="s-footer">
+
+        <div class="s-footer__main">
+            <div class="row">
+                
+                <div class="col-two md-four mob-full s-footer__sitelinks">
+                        
+                    <h4>Quick Links</h4>
+
+                    <ul class="s-footer__linklist">
+                        <li><a href="#0">Home</a></li>
+                        {% for category in categories %}
+                        <li><a href="#0">{{category.cat_name}}</a></li>
+                        {% endfor %}
+                        
+                    </ul>
+
+                </div> <!-- end s-footer__sitelinks -->
+
+                <div class="col-two md-four mob-full s-footer__archives">
+                        
+                    <h4>Archives</h4>
+
+                    <ul class="s-footer__linklist">
+                        <li><a href="#0">January 2018</a></li>
+                        <li><a href="#0">December 2017</a></li>
+                        <li><a href="#0">November 2017</a></li>
+                        <li><a href="#0">October 2017</a></li>
+                        <li><a href="#0">September 2017</a></li>
+                        <li><a href="#0">August 2017</a></li>
+                    </ul>
+
+                </div> <!-- end s-footer__archives -->
+
+                <div class="col-two md-four mob-full s-footer__social">
+                        
+                    <h4>Social</h4>
+
+                    <ul class="s-footer__linklist">
+                        <li><a href="#0">Facebook</a></li>
+                        <li><a href="#0">Instagram</a></li>
+                        <li><a href="#0">Twitter</a></li>
+                    </ul>
+
+                </div> <!-- end s-footer__social -->
+
+                <div class="col-five md-full end s-footer__subscribe">
+                        
+                    <h4>Get notified whenever Nnanda Kizito posts something</h4>
+
+                    <p>Provide your email address below for quick notifications</p>
+
+                    <div class="subscribe-form">
+                        <form id="mc-form" class="group" novalidate="true">
+
+                            <input style="background-color:grey" type="email" value="" name="EMAIL" class="email" id="mc-email" placeholder="Email Address" required="">
+                            <input type="submit" name="subscribe" value="Send">
+                
+                            <label for="mc-email" class="subscribe-message"></label>
+                
+                        </form>
+                    </div>
+
+                </div> <!-- end s-footer__subscribe -->
+
+            </div>
+        </div> <!-- end s-footer__main -->
+
+        <div class="s-footer__bottom">
+            <div class="row">
+                <div class="col-full">
+                    <div class="s-footer__copyright">
+                        <span>© Copyright Keeya Emmanuel 2020</span> 
+                        <span>Designed and hosted by <a href="http://keldotcom.com">KEL IT SOLUTIONS</a></span>
+                    </div>
+
+                    <div class="go-top">
+                        <a class="smoothscroll" title="Back to Top" href="#top"></a>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end s-footer__bottom -->
+
+    </footer> <!-- end s-footer -->
+
+
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader">
+            <div class="line-scale">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <!--Login Modal content -->
+        <div id="loginModal"  class="modal">
+            <div  class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h3 id="modalheading" class="modal-header-text">Login</h2>
+                </div>
+                <div class="modal-body">
+                    <div style="margin-left:50px;margin-right:100px" class="subscribe-form">
+                            <form class="group" method="post">
+                            {% csrf_token %}
+                                <br>
+                                <input id="form1" type="hidden"/>
+                                <input style="background-color:white;width:100%" type="text" id="username" name="username"   placeholder="Username" required>
+                                <input style="background-color:white;width:100%" type="password" id="password" name="password"   placeholder="Password" required>
+                                <button id="login-btn"><span>LOGIN</span></button>
+                                <br>
+                                <div id="error" style="align-content:center;color:red;display:none"></div>
+                                <br>
+                                <div class="row">
+                                </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    <!--Register Modal content -->
+        <div id="regModal"  class="modal">
+            <div  class="modal-content">
+                <div class="modal-header">
+                    <span class="close2">&times;</span>
+                    <h3  class="modal-header-text">Register to become a writer</h2>
+                </div>
+                <div class="modal-body">
+                    <div style="margin-left:50px;margin-right:100px" class="subscribe-form">
+                            <form  class="group" method="post">
+                            {% csrf_token %}
+                                <br>
+                                <input id="form2" type="hidden"/>
+                                <input style="background-color:white;width:100%" type="email" id="email2" name="email"   placeholder="Enter E-mail" required>
+                                <input style="background-color:white;width:100%" type="text"  name="username"   placeholder="Username" required>
+                                <input style="background-color:white;width:100%" type="text" id="password1"  name="password"   placeholder="Password" required>
+                                <input style="background-color:white;width:100%" type="text" id="password2"    placeholder="Confirm Password" required>
+                                <button id="register-btn"><span >REGISTER</span></button>
+                                <br>
+                                <div id="error2" style="align-content:center;color:red;display:none"></div>
+                                <br>
+                                <div class="row">
+                                </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Java Script
+    ================================================== -->
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/modal.js' %}"></script>
+    <script>
+    const ajaxRequest = (url, formObj)=>{
+            const form = formObj;
+                    $.ajax({
+                        url: url,
+                        data: form.serialize(),
+                        dataType: 'json',
+                        type:'post',
+                        success: function (data) {
+                        if (data) {
+                            if(data.message === 'success'){
+                                location.reload();
+                            }
+                            else{
+                                $("#error").html(data.message)
+                                $("#error").show()
+                            }
+                        }
+                        }
+                    });
+    }
+     $(document).ready(()=>{
+         let action ;
+         
+         $("#openLogin").click(()=>{
+             openModal("loginModal")
+             action = 'login'
+         })
+         $("#openRegister").click(()=>{
+            openModal("regModal")
+            action = 'register'
+         })
+         $("#login-btn").click((e)=>{
+             if($("#username").val() === "" || $("#password").val()===""){
+                 $("#error").html("All fields are required")
+                 $("#error").show()
+             }
+             else{
+                 e.preventDefault(); // we dont wanna reload
+                 url = "http://localhost:8000/nnanda/login"
+                 const formobj = $($("#form1")).closest("form");
+                 ajaxRequest(url, formobj)
+             }
+         })
+          $("#register-btn").click((e)=>{
+             if($("#username").val() === "" || $("#password1").val() === ""){
+                 $("#error2").html("all fields are required")
+                 $("#error2").show()
+             }
+             else if($("#password1").val() != $("#password2").val())){
+                 $("#error2").html("Passwords do not match")
+                 $("#error2").show()
+             }
+             else if(!isEmail($("#email").val())){
+                 $("#error2").html("Invalid Email format. (should be abcd@host.com)")
+                 $("#error2").show()
+             }
+             else{
+                 e.preventDefault(); // we dont wanna reload
+                 url = "http://localhost:8000/nnanda/register"
+                 const formobj = $($("#form1")).closest("form");
+                 ajaxRequest(url, formobj)
+             }
+         })
+         $("#logout").click(()=>{
+             url = 'http://localhost:8000/nnanda/logout'
+             $.ajax({
+                 url: url,
+                 type:'get',
+                 success: function (data) {
+                  if (data) {
+                          location.reload();  
+                    }
+                }
+            });
+         })
+     })
+    </script>
+ {% block javascript %}
+
+ {% endblock javascript %}
+</body>
+
+</html>
