@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('nnanda', '0003_blogpost_img'),
+        ('keeya', '0003_blogpost_img'),
     ]
 
     operations = [

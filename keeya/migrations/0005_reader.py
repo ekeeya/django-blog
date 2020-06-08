@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('nnanda', '0004_auto_20200607_1722'),
+        ('keeya', '0004_auto_20200607_1722'),
     ]
 
     operations = [

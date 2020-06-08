@@ -10,14 +10,14 @@ def index(request):
     posts = BlogPost.objects.order_by('-created_on')[:10]
     recent_post = posts[0]
     data = dict(categories=categories, posts=posts, recent_post=recent_post)
-    return render(request,'nnanda/index.html',data)
+    return render(request,'keeya/index.html',data)
 
 
 def post(request, post_id):
     categories = Category.objects.all()
     post = BlogPost.objects.get(id=int(post_id))
     data = dict(categories=categories,post=post)
-    return render(request, 'nnanda/post.html',data)
+    return render(request, 'keeya/post.html',data)
 
 
 def login(request):
@@ -46,6 +46,7 @@ def register(request):
         else:
             user =  User.objects.create_user(username=username,email=email,password=password)
             user.save()
+            auth.login(request,user) # log them in 
             return JsonResponse(dict(message="success"))
     
 

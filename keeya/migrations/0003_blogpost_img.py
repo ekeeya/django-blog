@@ -7,7 +7,7 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('nnanda', '0002_blogcomment'),
+        ('keeya', '0002_blogcomment'),
     ]
 
     operations = [

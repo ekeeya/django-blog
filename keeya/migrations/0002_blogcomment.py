@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('nnanda', '0001_initial'),
+        ('keeya', '0001_initial'),
     ]
 
     operations = [
@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('body', models.TextField()),
                 ('created_on', models.DateTimeField(auto_now_add=True)),
-                ('blog_post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='nnanda.BlogPost')),
+                ('blog_post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='keeya.BlogPost')),
                 ('created_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),

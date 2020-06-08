@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=150)),
                 ('body', models.TextField()),
                 ('created_on', models.DateTimeField(auto_now_add=True)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='nnanda.Category')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='keeya.Category')),
                 ('created_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),

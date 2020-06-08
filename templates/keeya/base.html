@@ -6,7 +6,7 @@
     <!--- basic page needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>Nnanda</title>
+    <title>keeya</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -45,7 +45,7 @@
             <div class="header__content row">
                 <div class="header__logo">
                     <a style="color:white;font-size:25pt;" class="logo" href="index.html">
-                    <b>Nnanda Kizito Sseruwagi.</b>
+                    <b>keeya Kizito Sseruwagi.</b>
                        <!--<img src="{% static 'images/logo.svg' %}" alt="Homepage">--> 
                     </a>
                 </div> <!-- end header__logo -->
@@ -63,7 +63,7 @@
                 </ul> <!-- end header__social -->
                 <nav class="header__nav-wrap">
                     <ul class="header__nav">
-                        <li><a href="/nnanda/" title="">Home</a></li>
+                        <li><a href="/keeya/" title="">Home</a></li>
                         <li class="has-children">
                             <a href="#0" title="">Categories</a>
                             <ul class="sub-menu">
@@ -170,7 +170,7 @@
 
                 <div class="col-five md-full end s-footer__subscribe">
                         
-                    <h4>Get notified whenever Nnanda Kizito posts something</h4>
+                    <h4>Get notified whenever keeya Kizito posts something</h4>
 
                     <p>Provide your email address below for quick notifications</p>
 
@@ -239,7 +239,10 @@
                                 <input style="background-color:white;width:100%" type="password" id="password" name="password"   placeholder="Password" required>
                                 <button id="login-btn"><span>LOGIN</span></button>
                                 <br>
-                                <div id="error" style="align-content:center;color:red;display:none"></div>
+                                <div style="display:none" class="alert-box alert-box--error hideit">
+                                    <p>Error Message. Your Message Goes Here.</p>
+                                    <i class="fa fa-times alert-box__close"></i>
+                                </div> <!-- end error -->
                                 <br>
                                 <div class="row">
                                 </div>
@@ -264,11 +267,14 @@
                                 <input id="form2" type="hidden"/>
                                 <input style="background-color:white;width:100%" type="email" id="email2" name="email"   placeholder="Enter E-mail" required>
                                 <input style="background-color:white;width:100%" type="text"  name="username"   placeholder="Username" required>
-                                <input style="background-color:white;width:100%" type="text" id="password1"  name="password"   placeholder="Password" required>
-                                <input style="background-color:white;width:100%" type="text" id="password2"    placeholder="Confirm Password" required>
+                                <input style="background-color:white;width:100%" type="password" id="password1"  name="password"   placeholder="Password" required>
+                                <input style="background-color:white;width:100%" type="password" id="password2"    placeholder="Confirm Password" required>
                                 <button id="register-btn"><span >REGISTER</span></button>
                                 <br>
-                                <div id="error2" style="align-content:center;color:red;display:none"></div>
+                                <div style="display:none" class="alert-box alert-box--error hideit">
+                                    <p>Error Message. Your Message Goes Here.</p>
+                                    <i class="fa fa-times alert-box__close"></i>
+                                </div> <!-- end error -->
                                 <br>
                                 <div class="row">
                                 </div>
@@ -297,8 +303,8 @@
                                 location.reload();
                             }
                             else{
-                                $("#error").html(data.message)
-                                $("#error").show()
+                                $(".alert-box").html(data.message)
+                                $(".alert-box").show()
                             }
                         }
                         }
@@ -317,38 +323,41 @@
          })
          $("#login-btn").click((e)=>{
              if($("#username").val() === "" || $("#password").val()===""){
-                 $("#error").html("All fields are required")
-                 $("#error").show()
+                 $(".alert-box").html("All fields are required")
+                 $(".alert-box").show()
              }
              else{
                  e.preventDefault(); // we dont wanna reload
-                 url = "http://localhost:8000/nnanda/login"
+                 url = "http://localhost:8000/keeya/login"
                  const formobj = $($("#form1")).closest("form");
                  ajaxRequest(url, formobj)
              }
          })
-          $("#register-btn").click((e)=>{
-             if($("#username").val() === "" || $("#password1").val() === ""){
-                 $("#error2").html("all fields are required")
-                 $("#error2").show()
+         $("#register-btn").click((e)=>{
+
+            if($("#password1").val() ===""){
+                $(".alert-box").html("Password Field required")
+                 $(".alert-box").show()
+            }
+             else if($("#password1").val() !== $("#password2").val()){
+                 $(".alert-box").html("Passwords do not match")
+                 $(".alert-box").show()
+                  e.preventDefault();
              }
-             else if($("#password1").val() != $("#password2").val())){
-                 $("#error2").html("Passwords do not match")
-                 $("#error2").show()
+             else if(!isEmail($("#email2").val())){
+                 $(".alert-box").html("Invalid Email format. (should be abcd@host.com)")
+                 $(".alert-box").show()
+                 e.preventDefault();
              }
-             else if(!isEmail($("#email").val())){
-                 $("#error2").html("Invalid Email format. (should be abcd@host.com)")
-                 $("#error2").show()
-             }
-             else{
+            else{
                  e.preventDefault(); // we dont wanna reload
-                 url = "http://localhost:8000/nnanda/register"
-                 const formobj = $($("#form1")).closest("form");
+                 url = "http://localhost:8000/keeya/register"
+                 const formobj = $($("#form2")).closest("form");
                  ajaxRequest(url, formobj)
              }
          })
          $("#logout").click(()=>{
-             url = 'http://localhost:8000/nnanda/logout'
+             url = 'http://localhost:8000/keeya/logout'
              $.ajax({
                  url: url,
                  type:'get',
