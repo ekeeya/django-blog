@@ -8,9 +8,13 @@ from django.http import JsonResponse
 def index(request):
     categories = Category.objects.all()
     posts = BlogPost.objects.order_by('-created_on')[:10]
-    recent_post = posts[0]
-    data = dict(categories=categories, posts=posts, recent_post=recent_post)
-    return render(request,'keeya/index.html',data)
+    if len(posts)>0:
+        recent_post = posts[0]
+        data = dict(categories=categories, posts=posts, recent_post=recent_post)
+        return render(request,'keeya/index.html',data)
+    else:
+        data = dict(categories=categories, posts=posts, recent_post=[])
+        return render(request,'keeya/index.html',data)
 
 
 def post(request, post_id):
